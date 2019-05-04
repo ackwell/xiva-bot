@@ -2,11 +2,13 @@ defmodule Bot.Consumer do
   use Coxir
 
   # :MESSAGE_REACTION_REMOVE
+  @impl true
   def handle_event({:MESSAGE_REACTION_ADD, reaction}, state) do
     IO.inspect(reaction)
     {:ok, state}
   end
 
+  @impl true
   def handle_event(event, state) do
     Bot.Commands.handle_event(event, state)
   end

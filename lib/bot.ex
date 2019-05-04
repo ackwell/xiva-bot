@@ -5,6 +5,7 @@ defmodule Bot do
 
   use Application
 
+  @impl true
   def start(_type, _args) do
     children = [
       %{id: Bot.Consumer, start: {Bot.Consumer, :start_link, []}}
