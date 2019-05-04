@@ -1,15 +1,10 @@
 defmodule Bot.Config do
   use GenServer
 
-  @enforce_keys [:path]
-  defstruct [
-    :path
-  ]
-
   # Client
 
   def start_link(path) do
-    GenServer.start_link(__MODULE__, %Bot.Config{path: path})
+    GenServer.start_link(__MODULE__, %{path: path})
   end
 
   # Server
@@ -25,11 +20,22 @@ defmodule Bot.Config do
 
   defp load_config(%{path: path}) do
     if File.regular?(path) do
-      File.read!(path)
+      encoded_config = File.read!(path)
+      read_config = Poison.decode!(encoded_config, keys: :atoms!)
+      merge_default_config(read_config)
     else
-      config = "TODO"
-      File.write!(path, config)
+      config = merge_default_config(%{override: "example2"})
+      encoded_config = Poison.encode!(config)
+      File.write!(path, encoded_config)
       config
     end
+  end
+
+  defp merge_default_config(overrides) do
+    defaults = %{
+      default: "example",
+      override: "i shouldn't see this"
+    }
+    Map.merge(defaults, overrides)
   end
 end
