@@ -7,7 +7,11 @@ defmodule Bot.Consumer do
     emoji = reaction.emoji.id || reaction.emoji.name
     role = Bot.Config.ReactionRole.get_role(emoji)
 
-    IO.inspect(role)
+    # TODO: NEED TO LIMIT TO REACTION ON A SPECIFIC MESSAGE
+    if role do
+      member = Member.get(reaction.guild_id, reaction.user_id)
+      Member.add_role(member, role)
+    end
 
     {:ok, state}
   end

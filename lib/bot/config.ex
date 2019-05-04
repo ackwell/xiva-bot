@@ -55,7 +55,7 @@ defmodule Bot.Config do
         &(&1.emoji == emoji_id)
       )
 
-    {:reply, reaction_role[:role], state}
+    {:reply, reaction_role && reaction_role.role, state}
   end
 
   @impl true
