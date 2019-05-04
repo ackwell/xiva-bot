@@ -8,6 +8,7 @@ defmodule Bot do
   @impl true
   def start(_type, _args) do
     children = [
+      {Bot.Config, "bot.json"},
       %{id: Bot.Consumer, start: {Bot.Consumer, :start_link, []}}
     ]
 

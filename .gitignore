@@ -24,3 +24,6 @@ bot-*.tar
 
 # Ignore sensitive keys and such
 /config/secrets.exs
+
+# Ignore config generated at runtime
+bot.json
