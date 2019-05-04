@@ -10,12 +10,17 @@ defmodule Bot.Commands do
     [emoji, role | _rest] = String.split(arguments)
 
     case role_id(role) do
-      {:incorrect} -> respond_fail(message)
+      {:incorrect} ->
+        respond_fail(message)
+
       {:ok, role_id} ->
-        emoji_id = case custom_emoji_id(emoji) do
-          {:incorrect} -> emoji
-          {:ok, id} -> id
-        end
+        emoji_id =
+          case custom_emoji_id(emoji) do
+            {:incorrect} -> emoji
+            {:ok, id} -> id
+          end
+
+        Bot.Config.ReactionRole.set(emoji_id, role_id)
 
         respond_success(message)
     end
