@@ -4,7 +4,11 @@ defmodule Bot.Consumer do
   # :MESSAGE_REACTION_REMOVE
   @impl true
   def handle_event({:MESSAGE_REACTION_ADD, reaction}, state) do
-    IO.inspect(reaction)
+    emoji = reaction.emoji.id || reaction.emoji.name
+    role = Bot.Config.ReactionRole.get_role(emoji)
+
+    IO.inspect(role)
+
     {:ok, state}
   end
 
