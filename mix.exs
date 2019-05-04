@@ -22,7 +22,8 @@ defmodule Bot.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:coxir, git: "https://github.com/satom99/coxir.git"}
+      {:coxir, git: "https://github.com/satom99/coxir.git"},
+      {:coxir_commander, git: "https://github.com/satom99/coxir_commander.git"}
     ]
   end
 end

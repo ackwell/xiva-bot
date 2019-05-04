@@ -7,7 +7,7 @@ defmodule Bot.Consumer do
     {:ok, state}
   end
 
-  def handle_event(_event, state) do
-    {:ok, state}
+  def handle_event(event, state) do
+    Bot.Commands.handle_event(event, state)
   end
 end
