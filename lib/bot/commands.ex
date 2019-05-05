@@ -1,11 +1,10 @@
 defmodule Bot.Commands do
   use Coxir.Commander
-  # import Coxir.Commander.Utils
+  import Coxir.Commander.Utils
 
   @prefix "|> "
 
-  # @permit &is_admin?/2 - broken on current rev
-  @permit :ADMINISTRATOR
+  @permit &is_admin?/2
   command set_reaction(arguments) do
     result =
       with [message_id, emoji, role | _rest] <- String.split(arguments),
