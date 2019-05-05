@@ -7,7 +7,7 @@ defmodule Bot.Commands do
   # @permit &is_admin?/2 - broken on current rev
   @permit :ADMINISTRATOR
   command set_reaction(arguments) do
-    [emoji, role | _rest] = String.split(arguments)
+    [message_id, emoji, role | _rest] = String.split(arguments)
 
     case role_id(role) do
       {:incorrect} ->
@@ -20,7 +20,7 @@ defmodule Bot.Commands do
             {:ok, id} -> id
           end
 
-        Bot.Config.ReactionRole.set(emoji_id, role_id)
+        Bot.Config.ReactionRole.set(message_id, emoji_id, role_id)
 
         respond_success(message)
     end

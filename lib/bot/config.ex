@@ -9,20 +9,20 @@ defmodule Bot.Config do
 
   defmodule ReactionRole do
     @derive [Poison.Encoder]
-    defstruct [:emoji, :role]
+    defstruct [:message, :emoji, :role]
 
-    def set(emoji_id, role_id) do
+    def set(message, emoji, role) do
       GenServer.call(Bot.Config, {
         :reaction_role,
         :set,
-        %ReactionRole{emoji: emoji_id, role: role_id}
+        %ReactionRole{message: message, emoji: emoji, role: role}
       })
 
       GenServer.cast(Bot.Config, :save)
     end
 
-    def get_role(emoji_id) do
-      GenServer.call(Bot.Config, {:reaction_role, :get_role, emoji_id})
+    def get_role(message, emoji) do
+      GenServer.call(Bot.Config, {:reaction_role, :get_role, message, emoji})
     end
   end
 
@@ -40,7 +40,7 @@ defmodule Bot.Config do
 
     reaction_roles =
       [reaction_role | reaction_roles]
-      |> Enum.uniq_by(fn %{emoji: emoji} -> emoji end)
+      |> Enum.uniq_by(fn %{message: message, emoji: emoji} -> {message, emoji} end)
 
     state = put_in(state.config.reaction_roles, reaction_roles)
 
@@ -48,11 +48,11 @@ defmodule Bot.Config do
   end
 
   @impl true
-  def handle_call({:reaction_role, :get_role, emoji_id}, _from, state) do
+  def handle_call({:reaction_role, :get_role, message, emoji}, _from, state) do
     reaction_role =
       Enum.find(
         state.config.reaction_roles,
-        &(&1.emoji == emoji_id)
+        &({&1.message, &1.emoji} == {message, emoji})
       )
 
     {:reply, reaction_role && reaction_role.role, state}
