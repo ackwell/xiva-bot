@@ -7,13 +7,9 @@ defmodule Bot.Commands do
   # @permit &is_admin?/2 - broken on current rev
   @permit :ADMINISTRATOR
   command set_reaction(arguments) do
-    [message_id, emoji, role | _rest] = String.split(arguments)
-
-    case role_id(role) do
-      {:incorrect} ->
-        respond_fail(message)
-
-      {:ok, role_id} ->
+    result =
+      with [message_id, emoji, role | _rest] <- String.split(arguments),
+           {:ok, role_id} <- role_id(role) do
         emoji_id =
           case custom_emoji_id(emoji) do
             {:incorrect} -> emoji
@@ -22,7 +18,12 @@ defmodule Bot.Commands do
 
         Bot.Config.ReactionRole.set(message_id, emoji_id, role_id)
 
-        respond_success(message)
+        :ok
+      end
+
+    case result do
+      :ok -> respond_success(message)
+      _ -> respond_fail(message)
     end
   end
 
