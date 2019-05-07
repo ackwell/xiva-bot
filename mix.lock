@@ -1,9 +1,11 @@
 %{
+  "artificery": {:hex, :artificery, "0.4.1", "90b1fcedb9034853b36dbea2174f9fc1172bd50b0686a723178103def5c9c1c8", [:mix], [], "hexpm"},
   "certifi": {:hex, :certifi, "2.5.1", "867ce347f7c7d78563450a18a6a28a8090331e77fa02380b4a21962a65d36ee5", [:rebar3], [{:parse_trans, "~>3.3", [hex: :parse_trans, repo: "hexpm", optional: false]}], "hexpm"},
   "chacha20": {:hex, :chacha20, "1.0.2", "73c5e96eba5e94917603a43c5c7c6b049436a5d71d9d3182781c345d87d28c8b", [:mix], [], "hexpm"},
   "coxir": {:git, "https://github.com/satom99/coxir.git", "ad9a653088ea2660f20f28201dd9412f55bae414", []},
   "coxir_commander": {:git, "https://github.com/satom99/coxir_commander.git", "927bc5cf58e2c7ac6b991284962cdfadbbbd2792", []},
   "curve25519": {:hex, :curve25519, "1.0.3", "101248eeb2ed28f1b8d2d423cf560bfc99f5e22bae5a2bb113fd24efad05fae1", [:mix], [], "hexpm"},
+  "distillery": {:hex, :distillery, "2.0.12", "6e78fe042df82610ac3fa50bd7d2d8190ad287d120d3cd1682d83a44e8b34dfb", [:mix], [{:artificery, "~> 0.2", [hex: :artificery, repo: "hexpm", optional: false]}], "hexpm"},
   "ed25519": {:hex, :ed25519, "1.3.1", "35a363527d1c85c773eae8b5e2dfe133c693c270a20e281a7021937929da5c2e", [:mix], [], "hexpm"},
   "equivalex": {:hex, :equivalex, "1.0.2", "b9a9aaf79f2556288f514218653beaddb15afa2af407bfec37c5c4906e39f514", [:mix], [], "hexpm"},
   "gen_stage": {:hex, :gen_stage, "0.14.1", "9d46723fda072d4f4bb31a102560013f7960f5d80ea44dcb96fd6304ed61e7a4", [:mix], [], "hexpm"},

@@ -14,7 +14,7 @@ defmodule Bot.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: [:logger, :inets],
       mod: {Bot, []}
     ]
   end
@@ -24,6 +24,7 @@ defmodule Bot.MixProject do
     [
       {:coxir, github: "satom99/coxir"},
       {:coxir_commander, github: "satom99/coxir_commander"},
+      {:distillery, "~> 2.0"},
       {:poison, "~> 4.0.1"}
     ]
   end
